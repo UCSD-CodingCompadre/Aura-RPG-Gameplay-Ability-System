@@ -19,12 +19,19 @@ class AURA_API AAuraPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 
-	virtual void PlayerTick(float DeltaTime) override;
+	
 
 public:
 
 	// Constructor
 	AAuraPlayerController();
+
+	/*
+	Player tick function that handles the cursor highlighting
+	@param float Deltatime the rate of frames
+	@return void
+	*/
+	virtual void PlayerTick(float DeltaTime) override;
 
 protected:
 
@@ -60,7 +67,14 @@ private:
 	*/
 	void Move(const FInputActionValue& InputActionValue);	
 
+	/*
+	Handle the cursor tracing during the tick
+	*/
 	void CursorTrace();
+
+	// Hold the last actor highlighted
 	IEnemyInterface* LastActor;
+
+	// Hold the current actor highlighted
 	IEnemyInterface* ThisActor;
 };

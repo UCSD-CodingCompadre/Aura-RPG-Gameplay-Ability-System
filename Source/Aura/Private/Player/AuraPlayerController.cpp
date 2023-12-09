@@ -15,18 +15,30 @@ AAuraPlayerController::AAuraPlayerController()
 
 void AAuraPlayerController::PlayerTick(float DeltaTime)
 {
+
+	// Call the parent PlayerTick function
 	Super::PlayerTick(DeltaTime);
 
+	// Call the cursor trace function
 	CursorTrace();
 }
 
 void AAuraPlayerController::CursorTrace()
 {
+
+	// Hold the hit result from the cursor
 	FHitResult CursorHit;
+
+	// Get the hit result from the cursor
 	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
+
+	// Check if there is not a hit
 	if (!CursorHit.bBlockingHit) return;
 
+	// Set the last actor 
 	LastActor = ThisActor;
+
+	// Hold the current actor
 	ThisActor = Cast<IEnemyInterface>(CursorHit.GetActor());
 
 	/**
@@ -43,36 +55,44 @@ void AAuraPlayerController::CursorTrace()
 	 *		- Do nothing
 	 */
 
+	// Check if there is no last actor
 	if (LastActor == nullptr)
 	{
+
+		// Check if there is a current actor
 		if (ThisActor != nullptr)
 		{
-			// Case B
+			
+			// Hightlight the current actor
 			ThisActor->HighlightActor();
 		}
-		else
-		{
-			// Case A - both are null, do nothing
-		}
 	}
-	else // LastActor is valid
+
+	// Else there is a last actor
+	else 
 	{
+
+		// Check if there is no current actor
 		if (ThisActor == nullptr)
 		{
-			// Case C
+			
+			// Unhighlight the last actor
 			LastActor->UnHighlightActor();
 		}
-		else // both actors are valid
+
+		// Else there is a current and last actor
+		else 
 		{
+
+			// Check if they are different
 			if (LastActor != ThisActor)
 			{
-				// Case D
+				
+				// Unhighlight the last actor
 				LastActor->UnHighlightActor();
+
+				// Highlight the current actor
 				ThisActor->HighlightActor();
-			}
-			else
-			{
-				// Case E - do nothing
 			}
 		}
 	}

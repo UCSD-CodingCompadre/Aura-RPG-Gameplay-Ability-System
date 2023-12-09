@@ -16,10 +16,22 @@ class AURA_API AEnemyCharacter : public ABaseCharacter, public IEnemyInterface
 	GENERATED_BODY()
 	
 public:
-	virtual void HighlightActor() override;
-	virtual void UnHighlightActor() override;
 
-	
-	UPROPERTY(BlueprintReadOnly)
-	bool bHighlighted = false;
+	// Constructor
+	AEnemyCharacter();
+
+	/*
+	Hightlight the actor using render custom depth
+	@param none
+	@return void
+	*/
+	virtual void HighlightActor() override;
+
+	/*
+	Unhightlight the actor using render custom depth
+	@param none
+	@return void 
+	*/
+	virtual void UnHighlightActor() override;
 };
+

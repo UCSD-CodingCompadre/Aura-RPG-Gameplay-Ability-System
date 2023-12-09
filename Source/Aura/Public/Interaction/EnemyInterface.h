@@ -23,6 +23,17 @@ class AURA_API IEnemyInterface
 
 public:
 
+	/*
+	Abstact hightlight actor function to implement custom higlighting
+	@param none
+	@return void
+	*/
 	virtual void HighlightActor() = 0;
+
+	/*
+	Abstact unhightlight actor function to implement custom unhiglighting
+	@param none
+	@return void
+	*/
 	virtual void UnHighlightActor() = 0;
 };
