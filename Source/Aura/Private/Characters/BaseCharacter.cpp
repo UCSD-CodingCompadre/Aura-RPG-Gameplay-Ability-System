@@ -6,18 +6,25 @@
 
 ABaseCharacter::ABaseCharacter()
 {
- 	
+
+	// Disable actor tick
 	PrimaryActorTick.bCanEverTick = false;
 
+	// Create the USkeletMeshComponent for the Weopon
 	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
+
+	// Attach the Weapon to the socket
 	Weapon->SetupAttachment(GetMesh(), FName("WeaponHandSocket"));
+
+	// Disable collision for the Weapon
 	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
 
 void ABaseCharacter::BeginPlay()
 {
+
+	// Call the parent BeginPlay function
 	Super::BeginPlay();
-	
 }
 
