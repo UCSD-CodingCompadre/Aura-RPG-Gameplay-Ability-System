@@ -13,12 +13,19 @@ class AURA_API ABaseCharacter : public ACharacter
 
 public:
 	
+	// Constructor
 	ABaseCharacter();
 
 protected:
 	
+	/*
+	Set up the skeletal mesh and components for the character
+	@param none
+	@return void
+	*/
 	virtual void BeginPlay() override;
 
+	// Hold the pointer to the Weapoon skeletal mesh
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
 };
