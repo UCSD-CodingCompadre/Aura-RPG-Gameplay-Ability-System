@@ -4,10 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "AbilitySystemInterface.h"
 #include "BaseCharacter.generated.h"
 
+class UAbilitySystemComponent;
+class UAttributeSet;
+
 UCLASS()
-class AURA_API ABaseCharacter : public ACharacter
+class AURA_API ABaseCharacter : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -16,6 +20,8 @@ public:
 	// Constructor
 	ABaseCharacter();
 
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
 protected:
 	
 	/*
@@ -28,4 +34,10 @@ protected:
 	// Hold the pointer to the Weapoon skeletal mesh
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
+
+	UPROPERTY()
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
+
+	UPROPERTY()
+	TObjectPtr<UAttributeSet> AttributeSet;
 };

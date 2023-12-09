@@ -2,6 +2,8 @@
 
 
 #include "Characters/EnemyCharacter.h"
+#include "AbilitySystem/AuraAbilitySystemComponent.h"
+#include "AbilitySystem/AuraAttributeSet.h"
 #include "Aura/Aura.h"
 
 AEnemyCharacter::AEnemyCharacter()
@@ -9,6 +11,11 @@ AEnemyCharacter::AEnemyCharacter()
     
     // Set the collision channel visibility to block
 	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
+
+    AbilitySystemComponent = CreateDefaultSubobject<UAuraAbilitySystemComponent>("AbilitySystemComponent");
+	AbilitySystemComponent->SetIsReplicated(true);
+
+	AttributeSet = CreateDefaultSubobject<UAuraAttributeSet>("AttributeSet");
 }
 
 
