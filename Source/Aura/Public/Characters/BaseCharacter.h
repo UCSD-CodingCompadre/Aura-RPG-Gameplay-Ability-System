@@ -35,9 +35,11 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	TObjectPtr<USkeletalMeshComponent> Weapon;
 
+	// Hold an object pointer to the ability system component
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
+	// Hold an object pointer to the attribute set
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
 };

@@ -22,6 +22,8 @@ ABaseCharacter::ABaseCharacter()
 
 UAbilitySystemComponent* ABaseCharacter::GetAbilitySystemComponent() const
 {
+
+	// Return the ability system component
 	return AbilitySystemComponent;
 }
 

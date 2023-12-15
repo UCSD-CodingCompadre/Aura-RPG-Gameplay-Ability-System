@@ -12,9 +12,16 @@ AEnemyCharacter::AEnemyCharacter()
     // Set the collision channel visibility to block
 	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
 
+    // Create the ability system component
     AbilitySystemComponent = CreateDefaultSubobject<UAuraAbilitySystemComponent>("AbilitySystemComponent");
-	AbilitySystemComponent->SetIsReplicated(true);
 
+    // Allow the component to replicate
+	AbilitySystemComponent->SetIsReplicated(true);
+    
+    // Set the replication mode to minimal
+    AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Minimal);
+
+    // Create the attribute set
 	AttributeSet = CreateDefaultSubobject<UAuraAttributeSet>("AttributeSet");
 }
 
@@ -43,4 +50,14 @@ void AEnemyCharacter::UnHighlightActor()
 
     // Disable the weapon skeletal mesh render custom depth
 	Weapon->SetRenderCustomDepth(false);
+}
+
+void AEnemyCharacter::BeginPlay()
+{
+    
+    // Call the parent BeginPlay method
+	Super::BeginPlay();
+
+    // Set the ability actor info for the ability system component
+	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 }

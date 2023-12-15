@@ -18,15 +18,33 @@ class AURA_API AAuraPlayerState : public APlayerState, public IAbilitySystemInte
 {
 	GENERATED_BODY()
 
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
+
 public:
 	
+	// Constructor
 	AAuraPlayerState();
 
+	/*
+	Getter function that returns the ability system component
+	@param none
+	@return UAbilitySystemComponent*
+	*/
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	
+	/*
+	Getter function that returns the attribute set
+	@param none
+	@return UAttributeSet*
+	*/
+	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
+
+protected: 
+
+	// Hold an object pointer for the ability system component
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
+	// Hold an object pointer for the attribute set
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
 };

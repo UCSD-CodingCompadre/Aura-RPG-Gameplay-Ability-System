@@ -33,5 +33,14 @@ public:
 	@return void 
 	*/
 	virtual void UnHighlightActor() override;
+
+protected:
+	
+	/*
+	Set the ability system component owner
+	@param none
+	@return void
+	*/
+	virtual void BeginPlay() override;
 };
 

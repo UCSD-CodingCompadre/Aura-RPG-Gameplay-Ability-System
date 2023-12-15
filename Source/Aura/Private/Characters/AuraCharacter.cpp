@@ -1,8 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
+#include "AbilitySystemComponent.h"
 #include "Characters/AuraCharacter.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Player/AuraPlayerState.h"
 
 AAuraCharacter::AAuraCharacter()
 {
@@ -29,3 +30,41 @@ AAuraCharacter::AAuraCharacter()
 	bUseControllerRotationYaw = false;
 }
 
+void AAuraCharacter::PossessedBy(AController* NewController)
+{
+
+	// Call the parent PossedBy method
+	Super::PossessedBy(NewController);
+
+	// Init ability actor info for the Server
+	InitAbilityActorInfo();
+}
+
+void AAuraCharacter::OnRep_PlayerState()
+{
+
+	// Call the parent OnRep_PlayerState
+	Super::OnRep_PlayerState();
+
+	// Init ability actor info for the Client
+	InitAbilityActorInfo();
+}
+
+void AAuraCharacter::InitAbilityActorInfo()
+{
+
+	// Hold the aura player state
+	AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
+	
+	// Check if there is a aura player state
+	check(AuraPlayerState);
+
+	// Set the ability actor info for the ability system component
+	AuraPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(AuraPlayerState, this);
+
+	// Hold the ability system component from the aura player state
+	AbilitySystemComponent = AuraPlayerState->GetAbilitySystemComponent();
+
+	// Hold the attribute set from the aura player state
+	AttributeSet = AuraPlayerState->GetAttributeSet();
+}
